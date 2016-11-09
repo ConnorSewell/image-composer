@@ -4,7 +4,8 @@ import math
 import sys
 import feature_extractor
 
-INDEX_PATH = "/home/ouanixi/Work/image-composer/dataset/index/"
+#INDEX_PATH = "/home/ouanixi/Work/image-composer/dataset/index/"
+INDEX_PATH = "C:\Users\Connor\Desktop\image-composer\dataset\index"
 
 def readIndex():
     json_data = open(INDEX_PATH + "histogram.index").read()
