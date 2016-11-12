@@ -1,15 +1,12 @@
-import json
 import cv2
-import math
-import sys
-import feature_extractor
 import numpy as np
 
 
 #http://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/histogram_comparison/histogram_comparison.html
 
-def calc_Correlation(histogram1, histogram2):
+def calc_correlation(histogram1, histogram2):
     correlation = cv2.compareHist(histogram1, histogram2, method=cv2.HISTCMP_CORREL)
+    return correlation
 
 
 def calc_bhattacharyya_dist(histogram1, histogram2):
@@ -42,7 +39,7 @@ def calc_histogram(image):
     return hist
 
 
-#http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_gradients/py_gradients.html
+#ttp://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_gradients/py_gradients.htmlh
 #def sobel_comparison(image1, image2):
 #    image1_x_sobel = cv2.Sobel(image1, cv2.CV_64F, 1, 0, ksize=5)
 #    image1_y_sobel = cv2.Sobel(image1, cv2.CV_64F, 0, 1, ksize=5)

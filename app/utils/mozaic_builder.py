@@ -71,4 +71,4 @@ def main(inputImagePath, tileSize):
 
     print "Finished processing of image"
 
-    cv2.imwrite("Result2.jpg", inputImage)
+    cv2.imwrite("Result4.jpg", inputImage)
