@@ -7,8 +7,10 @@ import os
 import feature_extractor
 
 
-DB_PATH = "/home/ouanixi/Work/image-composer/dataset/images/"
-INDEX_PATH = "/home/ouanixi/Work/image-composer/dataset/index/"
+#DB_PATH = "/home/ouanixi/Work/image-composer/dataset/images/"
+DB_PATH = "C:\Users\Connor\Desktop\images"
+INDEX_PATH = "C:\Users\Connor\Desktop\image-composer\dataset\index"
+#INDEX_PATH = "/home/ouanixi/Work/image-composer/dataset/index/"
 
 
 def convertImage(path, length):
