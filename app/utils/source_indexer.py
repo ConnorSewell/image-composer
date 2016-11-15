@@ -36,6 +36,7 @@ def start_indexing(length):
         print "Processing file: " + file
         image = convertImage(file, length)
         entry = feature_extractor.extractFeature(image)
+        entry["histogram"] = entry["histogram"].tolist()
         entry["file"] = ntpath.basename(file)
         index.append(entry)
 

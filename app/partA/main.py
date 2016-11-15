@@ -1,5 +1,5 @@
-import utils.source_indexer as si
-import utils.mozaic_builder as mb
+import app.utils.source_indexer as si
+import app.utils.mozaic_builder as mb
 
 
 def start(imgPath, output_height, output_width, window_size):
