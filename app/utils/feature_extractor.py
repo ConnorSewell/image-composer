@@ -1,6 +1,9 @@
 import cv2
 import HistogramHandler
 import numpy as np
+from skimage import data, img_as_float
+from skimage.measure import structural_similarity as ssim
+
 
 
 def getAverageColor(image, index, bins):
@@ -40,6 +43,17 @@ def getHoughTransformLines(img):
     return length
 
 
+def calc_entropy(histogram):
+    return 0
+
+#http://scikit-image.org/docs/dev/auto_examples/plot_ssim.html
+
+
+def calc_ssim(img):
+    imgSSIM = ssim(img, img, dynamic_range=img.max() - img.min())
+    return imgSSIM
+
+
 #http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_features_harris/py_features_harris.html
 def harris_corner_detection(img):
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -51,6 +65,11 @@ def harris_corner_detection(img):
     img[dst>0.01*dst.max()]=[0,0,255]
 
     return img.flatten()
+
+
+def siftDescriptor(img):
+    sift = cv2.xfeatures2d.SIFT_create()
+    return sift.detectAndCompute(img, None)
 
 
 def extractFeature(image):
