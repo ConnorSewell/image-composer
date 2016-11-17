@@ -5,10 +5,10 @@ from sklearn import svm
 import graphlab
 
 
-train_images = graphlab.SFrame.read_csv('hough_line_count_only_train.csv')
+train_images = graphlab.SFrame.read_csv('corners_only_train.csv')
 graphlab.cross_validation.shuffle(train_images)
 # train_images = gl.cross_validation.shuffle(train_images)
-test_images = graphlab.SFrame.read_csv('hough_line_count_only_test.csv')
+test_images = graphlab.SFrame.read_csv('corners_only_test.csv')
 
 features = train_images.column_names()
 features.remove('class')
@@ -17,7 +17,7 @@ print features
 
 X_test, Y_test = get_numpy_data(test_images, features, 'class')
 X,Y = get_numpy_data(train_images, features, 'class')
-print X
+#print X
 # Neural network experiment
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5,2), random_state=1)
 clf.fit(X,Y)

@@ -56,7 +56,11 @@ def calc_ssim(img):
 
 #http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_features_harris/py_features_harris.html
 def harris_corner_detection(img):
-    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    #gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+    img = cv2.resize(img, (25, 25), interpolation=cv2.INTER_AREA)
+    img = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 21)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray = np.float32(gray)
 
     dst = cv2.cornerHarris(gray,2,3,0.04)

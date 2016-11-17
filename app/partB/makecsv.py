@@ -4,12 +4,13 @@ from app.utils.utils import shuffle_lines
 import numpy as np
 import csv
 import os
+from app.utils import HistogramHandler
 
 
 #DATAPATH = "/home/ouanixi/Work/image-composer/dataset/raw"
-DATAPATH = "C:/Users/Connor/Desktop/NewImages/Testing"
-MAN_TRAINING = "manmade_test.txt"
-NAT_TRAINING = "natural_test.txt"
+DATAPATH = "C:/Users/Connor/Desktop/NewImages/Training"
+MAN_TRAINING = "manmade_training.txt"
+NAT_TRAINING = "natural_training.txt"
 
 #sift = cv2.SIFT()
 
@@ -34,36 +35,18 @@ def create_training_set():
         img = cv2.imread(name)
         #edges = feature_extractor.getEdgeImage(img)
         img_dict = {}
-        #for i in xrange(len(edges)):
-        #    pix = 'pix_' + str(i)
-        #    img_dict[pix] = edges[i]
-        #lineCount = feature_extractor.getHoughTransformLines(img)
-        #kp, dsc = sift.com
-        #sift = cv2.xfeatures2d.SIFT_create()
-        #kp, dsc = feature_extractor.siftDescriptor(img)
-        #pix = 'pix'
-        #img_dict[pix] = lineCount
-        corners = feature_extractor.harris_corner_detection(img)
-        for i in xrange(len(corners)):
-            pix = 'pix_' + str(i)
-            img_dict[pix] = corners[i]
+        histogram = HistogramHandler.calc_histogram(img)
+        pix = 'pix_ '
+        img_dict[pix] = histogram
         img_dict["class"] = 0
         feature_list.append(img_dict)
 
     for name in nat_image_names:
         img = cv2.imread(name)
         img_dict = {}
-        #edges = feature_extractor.getEdgeImage(img)
-        #for i in xrange(len(edges)):
-        #    pix = 'pix_' + str(i)
-        #    img_dict[pix] = edges[i]
-        #lineCount = feature_extractor.getHoughTransformLines(img)
-        #pix = 'pix'
-        #img_dict[pix] = lineCount
-        corners = feature_extractor.harris_corner_detection(img)
-        for i in xrange(len(corners)):
-            pix = 'pix_' + str(i)
-            img_dict[pix] = corners[i]
+        histogram = HistogramHandler.calc_histogram(img)
+        pix = 'pix_ '
+        img_dict[pix] = histogram
         img_dict["class"] = 1
         feature_list.append(img_dict)
 
@@ -73,10 +56,9 @@ def create_training_set():
 def make_training_csv():
     toCSV = create_training_set()
     keys = toCSV[0].keys()
-    with open('harris_edges_only_training.csv', 'wb') as output_file:
+    with open('histogram_only_train.csv', 'ab') as output_file:
         dict_writer = csv.DictWriter(output_file, keys)
         dict_writer.writeheader()
         dict_writer.writerows(toCSV)
-
 
 make_training_csv()
